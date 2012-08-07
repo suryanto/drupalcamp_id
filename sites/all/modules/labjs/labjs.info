@@ -1,0 +1,15 @@
+; $Id: labjs.info,v 1.2 2011/01/07 14:17:38 jcisio Exp $
+
+name = LABjs
+description = The performance script loader
+core = 7.x
+files[] = labjs.module
+package = Javascript Utilities
+tags[] = javascript
+
+; Information added by drupal.org packaging script on January 1, 1970 - 00:00
+version = "7.x-1.x-dev"
+core = "7.x"
+project = "labjs"
+datestamp = "1295439894"
+

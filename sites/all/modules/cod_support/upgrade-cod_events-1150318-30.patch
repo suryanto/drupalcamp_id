@@ -1,0 +1,1130 @@
+diff --git a/cod_events/cod_events.features.content.inc b/cod_events/cod_events.features.content.inc
+deleted file mode 100644
+index bcadd98..0000000
+--- a/cod_events/cod_events.features.content.inc
++++ /dev/null
+@@ -1,129 +0,0 @@
+-<?php
+-
+-/**
+- * Implementation of hook_content_default_fields().
+- */
+-function cod_events_content_default_fields() {
+-  $fields = array();
+-
+-  // Exported field: field_dates
+-  $fields['event-field_dates'] = array(
+-    'field_name' => 'field_dates',
+-    'type_name' => 'event',
+-    'display_settings' => array(
+-      'label' => array(
+-        'format' => 'above',
+-        'exclude' => 0,
+-      ),
+-      'teaser' => array(
+-        'format' => 'default',
+-        'exclude' => 0,
+-      ),
+-      'full' => array(
+-        'format' => 'default',
+-        'exclude' => 0,
+-      ),
+-      '4' => array(
+-        'format' => 'default',
+-        'exclude' => 0,
+-      ),
+-      'token' => array(
+-        'format' => 'default',
+-        'exclude' => 0,
+-      ),
+-    ),
+-    'widget_active' => '1',
+-    'type' => 'date',
+-    'required' => '0',
+-    'multiple' => '0',
+-    'module' => 'date',
+-    'active' => '1',
+-    'granularity' => array(
+-      'year' => 'year',
+-      'month' => 'month',
+-      'day' => 'day',
+-      'hour' => 'hour',
+-      'minute' => 'minute',
+-    ),
+-    'timezone_db' => 'UTC',
+-    'tz_handling' => 'site',
+-    'todate' => 'optional',
+-    'repeat' => 0,
+-    'repeat_collapsed' => '',
+-    'default_format' => 'medium',
+-    'widget' => array(
+-      'default_value' => 'blank',
+-      'default_value_code' => '',
+-      'default_value2' => 'same',
+-      'default_value_code2' => '',
+-      'input_format' => 'm/d/Y - H:i',
+-      'input_format_custom' => '',
+-      'increment' => '1',
+-      'text_parts' => array(),
+-      'year_range' => '-3:+3',
+-      'label_position' => 'above',
+-      'label' => 'Dates',
+-      'weight' => '-3',
+-      'description' => '',
+-      'type' => 'date_popup',
+-      'module' => 'date',
+-    ),
+-  );
+-
+-  // Exported field: field_image_cache
+-  $fields['event-field_image_cache'] = array(
+-    'field_name' => 'field_image_cache',
+-    'type_name' => 'event',
+-    'display_settings' => array(
+-      'label' => array(
+-        'format' => 'hidden',
+-      ),
+-      'teaser' => array(
+-        'format' => 'hidden',
+-      ),
+-      'full' => array(
+-        'format' => 'hidden',
+-      ),
+-      '4' => array(
+-        'format' => 'hidden',
+-      ),
+-    ),
+-    'widget_active' => '1',
+-    'type' => 'filefield',
+-    'required' => '0',
+-    'multiple' => '1',
+-    'module' => 'filefield',
+-    'active' => '1',
+-    'list_field' => '0',
+-    'list_default' => 1,
+-    'description_field' => '0',
+-    'widget' => array(
+-      'file_extensions' => 'gif jpg png',
+-      'file_path' => NULL,
+-      'progress_indicator' => NULL,
+-      'max_filesize_per_file' => NULL,
+-      'max_filesize_per_node' => NULL,
+-      'max_resolution' => NULL,
+-      'min_resolution' => NULL,
+-      'alt' => NULL,
+-      'custom_alt' => 1,
+-      'title' => NULL,
+-      'custom_title' => 1,
+-      'title_type' => NULL,
+-      'default_image' => NULL,
+-      'use_default_image' => NULL,
+-      'label' => 'Image',
+-      'weight' => '-2',
+-      'description' => '',
+-      'type' => 'imagefield_widget',
+-      'module' => 'imagefield',
+-    ),
+-  );
+-
+-  // Translatables
+-  // Included for use with string extractors like potx.
+-  t('Dates');
+-  t('Image');
+-
+-  return $fields;
+-}
+diff --git a/cod_events/cod_events.features.inc b/cod_events/cod_events.features.inc
+index b199393..add7540 100644
+--- a/cod_events/cod_events.features.inc
++++ b/cod_events/cod_events.features.inc
+@@ -1,20 +1,73 @@
+ <?php
++/**
++ * @file
++ * cod_events.features.inc
++ */
+ 
+ /**
+- * Implementation of hook_ctools_plugin_api().
++ * Implements hook_commerce_product_default_types().
++ */
++function cod_events_commerce_product_default_types() {
++  $items = array(
++    'cod_paid_event' => array(
++      'type' => 'cod_paid_event',
++      'name' => 'Paid Event',
++      'description' => 'A paid event product',
++      'help' => '',
++      'revision' => '1',
++      'module' => 'commerce_product_ui',
++    ),
++  );
++  return $items;
++}
++
++/**
++ * Implements hook_ctools_plugin_api().
+  */
+ function cod_events_ctools_plugin_api() {
+   list($module, $api) = func_get_args();
+   if ($module == "strongarm" && $api == "strongarm") {
+-    return array("version" => 1);
++    return array("version" => "1");
+   }
+ }
+ 
+ /**
+- * Implementation of hook_views_api().
++ * Implements hook_node_info().
+  */
+-function cod_events_views_api() {
+-  return array(
+-    'api' => '2',
++function cod_events_node_info() {
++  $items = array(
++    'event' => array(
++      'name' => t('Event'),
++      'base' => 'node_content',
++      'description' => t('Provides free and paid event registration on the Event content type.'),
++      'has_title' => '1',
++      'title_label' => t('Title'),
++      'help' => '',
++    ),
+   );
++  return $items;
++}
++
++/**
++ * Implements hook_default_registration_type().
++ */
++function cod_events_default_registration_type() {
++  $items = array();
++  $items['free_event'] = entity_import('registration_type', '{
++    "name" : "free_event",
++    "label" : "Free Event",
++    "locked" : "0",
++    "weight" : "0",
++    "data" : null,
++    "rdf_mapping" : []
++  }');
++  $items['paid_event'] = entity_import('registration_type', '{
++    "name" : "paid_event",
++    "label" : "Paid Event",
++    "locked" : "0",
++    "weight" : "0",
++    "data" : null,
++    "rdf_mapping" : []
++  }');
++  return $items;
+ }
+diff --git a/cod_events/cod_events.features.user_permission.inc b/cod_events/cod_events.features.user_permission.inc
+index 1f91995..7059413 100644
+--- a/cod_events/cod_events.features.user_permission.inc
++++ b/cod_events/cod_events.features.user_permission.inc
+@@ -1,101 +1,188 @@
+ <?php
++/**
++ * @file
++ * cod_events.features.user_permission.inc
++ */
+ 
+ /**
+- * Implementation of hook_user_default_permissions().
++ * Implements hook_user_default_permissions().
+  */
+ function cod_events_user_default_permissions() {
+   $permissions = array();
+ 
+-  // Exported permission: administer UC_Signup
+-  $permissions['administer UC_Signup'] = array(
+-    'name' => 'administer UC_Signup',
++  // Exported permission: administer free_event registration.
++  $permissions['administer free_event registration'] = array(
++    'name' => 'administer free_event registration',
++    'roles' => array(),
++    'module' => 'registration',
++  );
++
++  // Exported permission: administer paid_event registration.
++  $permissions['administer paid_event registration'] = array(
++    'name' => 'administer paid_event registration',
++    'roles' => array(),
++    'module' => 'registration',
++  );
++
++  // Exported permission: create free_event registration.
++  $permissions['create free_event registration'] = array(
++    'name' => 'create free_event registration',
++    'roles' => array(
++      0 => 'anonymous user',
++      1 => 'authenticated user',
++    ),
++    'module' => 'registration',
++  );
++
++  // Exported permission: create free_event registration other anonymous.
++  $permissions['create free_event registration other anonymous'] = array(
++    'name' => 'create free_event registration other anonymous',
++    'roles' => array(
++      0 => 'anonymous user',
++      1 => 'authenticated user',
++    ),
++    'module' => 'registration',
++  );
++
++  // Exported permission: create free_event registration other users.
++  $permissions['create free_event registration other users'] = array(
++    'name' => 'create free_event registration other users',
++    'roles' => array(),
++    'module' => 'registration',
++  );
++
++  // Exported permission: create paid_event registration.
++  $permissions['create paid_event registration'] = array(
++    'name' => 'create paid_event registration',
++    'roles' => array(
++      0 => 'anonymous user',
++    ),
++    'module' => 'registration',
++  );
++
++  // Exported permission: create paid_event registration other anonymous.
++  $permissions['create paid_event registration other anonymous'] = array(
++    'name' => 'create paid_event registration other anonymous',
++    'roles' => array(
++      0 => 'anonymous user',
++      1 => 'authenticated user',
++    ),
++    'module' => 'registration',
++  );
++
++  // Exported permission: create paid_event registration other users.
++  $permissions['create paid_event registration other users'] = array(
++    'name' => 'create paid_event registration other users',
++    'roles' => array(),
++    'module' => 'registration',
++  );
++
++  // Exported permission: delete any free_event registration.
++  $permissions['delete any free_event registration'] = array(
++    'name' => 'delete any free_event registration',
++    'roles' => array(
++      0 => 'attendee manager',
++    ),
++    'module' => 'registration',
++  );
++
++  // Exported permission: delete any paid_event registration.
++  $permissions['delete any paid_event registration'] = array(
++    'name' => 'delete any paid_event registration',
+     'roles' => array(
+-      '0' => 'attendee manager',
++      0 => 'attendee manager',
+     ),
++    'module' => 'registration',
+   );
+ 
+-  // Exported permission: administer all signups
+-  $permissions['administer all signups'] = array(
+-    'name' => 'administer all signups',
++  // Exported permission: delete own free_event registration.
++  $permissions['delete own free_event registration'] = array(
++    'name' => 'delete own free_event registration',
+     'roles' => array(
+-      '0' => 'attendee manager',
++      0 => 'attendee manager',
+     ),
++    'module' => 'registration',
+   );
+ 
+-  // Exported permission: administer signups for own content
+-  $permissions['administer signups for own content'] = array(
+-    'name' => 'administer signups for own content',
++  // Exported permission: delete own paid_event registration.
++  $permissions['delete own paid_event registration'] = array(
++    'name' => 'delete own paid_event registration',
+     'roles' => array(
+-      '0' => 'attendee manager',
+-      '1' => 'authenticated user',
++      0 => 'attendee manager',
+     ),
++    'module' => 'registration',
+   );
+ 
+-  // Exported permission: cancel own signups
+-  $permissions['cancel own signups'] = array(
+-    'name' => 'cancel own signups',
++  // Exported permission: update any free_event registration.
++  $permissions['update any free_event registration'] = array(
++    'name' => 'update any free_event registration',
+     'roles' => array(
+-      '0' => 'attendee manager',
+-      '1' => 'authenticated user',
++      0 => 'attendee manager',
+     ),
++    'module' => 'registration',
+   );
+ 
+-  // Exported permission: cancel signups
+-  $permissions['cancel signups'] = array(
+-    'name' => 'cancel signups',
++  // Exported permission: update any paid_event registration.
++  $permissions['update any paid_event registration'] = array(
++    'name' => 'update any paid_event registration',
+     'roles' => array(
+-      '0' => 'attendee manager',
++      0 => 'attendee manager',
+     ),
++    'module' => 'registration',
+   );
+ 
+-  // Exported permission: edit own signups
+-  $permissions['edit own signups'] = array(
+-    'name' => 'edit own signups',
++  // Exported permission: update own free_event registration.
++  $permissions['update own free_event registration'] = array(
++    'name' => 'update own free_event registration',
+     'roles' => array(
+-      '0' => 'attendee manager',
++      0 => 'authenticated user',
+     ),
++    'module' => 'registration',
+   );
+ 
+-  // Exported permission: email all signed up users
+-  $permissions['email all signed up users'] = array(
+-    'name' => 'email all signed up users',
++  // Exported permission: update own paid_event registration.
++  $permissions['update own paid_event registration'] = array(
++    'name' => 'update own paid_event registration',
+     'roles' => array(
+-      '0' => 'attendee manager',
++      0 => 'authenticated user',
+     ),
++    'module' => 'registration',
+   );
+ 
+-  // Exported permission: email users signed up for own content
+-  $permissions['email users signed up for own content'] = array(
+-    'name' => 'email users signed up for own content',
++  // Exported permission: view free_event registration.
++  $permissions['view free_event registration'] = array(
++    'name' => 'view free_event registration',
+     'roles' => array(
+-      '0' => 'attendee manager',
++      0 => 'attendee manager',
+     ),
++    'module' => 'registration',
+   );
+ 
+-  // Exported permission: purchase signups for other users
+-  $permissions['purchase signups for other users'] = array(
+-    'name' => 'purchase signups for other users',
++  // Exported permission: view own free_event registration.
++  $permissions['view own free_event registration'] = array(
++    'name' => 'view own free_event registration',
+     'roles' => array(
+-      '0' => 'anonymous user',
+-      '1' => 'authenticated user',
++      0 => 'authenticated user',
+     ),
++    'module' => 'registration',
+   );
+ 
+-  // Exported permission: sign up for content
+-  $permissions['sign up for content'] = array(
+-    'name' => 'sign up for content',
++  // Exported permission: view own paid_event registration.
++  $permissions['view own paid_event registration'] = array(
++    'name' => 'view own paid_event registration',
+     'roles' => array(
+-      '0' => 'attendee manager',
+-      '1' => 'authenticated user',
++      0 => 'authenticated user',
+     ),
++    'module' => 'registration',
+   );
+ 
+-  // Exported permission: view all signups
+-  $permissions['view all signups'] = array(
+-    'name' => 'view all signups',
++  // Exported permission: view paid_event registration.
++  $permissions['view paid_event registration'] = array(
++    'name' => 'view paid_event registration',
+     'roles' => array(
+-      '0' => 'attendee manager',
++      0 => 'attendee manager',
+     ),
++    'module' => 'registration',
+   );
+ 
+   return $permissions;
+diff --git a/cod_events/cod_events.features.user_role.inc b/cod_events/cod_events.features.user_role.inc
+index bf88504..d1aa6d6 100644
+--- a/cod_events/cod_events.features.user_role.inc
++++ b/cod_events/cod_events.features.user_role.inc
+@@ -1,14 +1,19 @@
+ <?php
++/**
++ * @file
++ * cod_events.features.user_role.inc
++ */
+ 
+ /**
+- * Implementation of hook_user_default_roles().
++ * Implements hook_user_default_roles().
+  */
+ function cod_events_user_default_roles() {
+   $roles = array();
+ 
+-  // Exported role: attendee manager
++  // Exported role: attendee manager.
+   $roles['attendee manager'] = array(
+     'name' => 'attendee manager',
++    'weight' => '4',
+   );
+ 
+   return $roles;
+diff --git a/cod_events/cod_events.info b/cod_events/cod_events.info
+index 0d3e49f..b2817b7 100644
+--- a/cod_events/cod_events.info
++++ b/cod_events/cod_events.info
+@@ -1,44 +1,59 @@
+-core = "6.x"
+-dependencies[] = "cod_base"
+-dependencies[] = "date"
+-dependencies[] = "date_api"
+-dependencies[] = "date_popup"
+-dependencies[] = "features"
+-dependencies[] = "imagefield"
+-dependencies[] = "profile"
+-dependencies[] = "signup"
+-dependencies[] = "signup_profile"
+-dependencies[] = "strongarm"
+-dependencies[] = "uc_cart"
+-dependencies[] = "uc_order"
+-dependencies[] = "uc_payment"
+-dependencies[] = "uc_product"
+-dependencies[] = "uc_signup"
+-dependencies[] = "uc_store"
+-dependencies[] = "views_bulk_operations"
+-description = "Provides free & paid event registration and administrative signup lists"
+-features[content][] = "event-field_dates"
+-features[content][] = "event-field_image_cache"
+-features[ctools][] = "strongarm:strongarm:1"
+-features[user_permission][] = "administer UC_Signup"
+-features[user_permission][] = "administer all signups"
+-features[user_permission][] = "administer signups for own content"
+-features[user_permission][] = "cancel own signups"
+-features[user_permission][] = "cancel signups"
+-features[user_permission][] = "edit own signups"
+-features[user_permission][] = "email all signed up users"
+-features[user_permission][] = "email users signed up for own content"
+-features[user_permission][] = "purchase signups for other users"
+-features[user_permission][] = "sign up for content"
+-features[user_permission][] = "view all signups"
+-features[user_role][] = "attendee manager"
+-features[variable][] = "comment_event"
+-features[variable][] = "signup_admin_list_view"
+-features[variable][] = "signup_date_field_event"
+-features[variable][] = "signup_node_default_state_event"
+-features[variable][] = "uc_product_shippable_event"
+-features[views][] = "cod_signup_user_vbo_admin_list"
+-features[views_api][] = "api:2"
+-name = "COD Events"
+-package = "COD"
+-project = "cod_events"
+\ No newline at end of file
++name = COD Events
++description = Provides base event managment
++core = 7.x
++package = COD
++php = 5.2.4
++project = cod_events
++dependencies[] = cod_base
++dependencies[] = commerce
++dependencies[] = commerce_cart
++dependencies[] = commerce_features
++dependencies[] = commerce_product_ui
++dependencies[] = commerce_registration
++dependencies[] = date
++dependencies[] = date_api
++dependencies[] = date_popup
++dependencies[] = features
++dependencies[] = image
++dependencies[] = registration
++dependencies[] = strongarm
++features[commerce_product_type][] = cod_paid_event
++features[ctools][] = strongarm:strongarm:1
++features[features_api][] = api:1
++features[field][] = commerce_product-cod_paid_event-commerce_price
++features[node][] = event
++features[registration_type][] = free_event
++features[registration_type][] = paid_event
++features[user_permission][] = administer free_event registration
++features[user_permission][] = administer paid_event registration
++features[user_permission][] = create free_event registration
++features[user_permission][] = create free_event registration other anonymous
++features[user_permission][] = create free_event registration other users
++features[user_permission][] = create paid_event registration
++features[user_permission][] = create paid_event registration other anonymous
++features[user_permission][] = create paid_event registration other users
++features[user_permission][] = delete any free_event registration
++features[user_permission][] = delete any paid_event registration
++features[user_permission][] = delete own free_event registration
++features[user_permission][] = delete own paid_event registration
++features[user_permission][] = update any free_event registration
++features[user_permission][] = update any paid_event registration
++features[user_permission][] = update own free_event registration
++features[user_permission][] = update own paid_event registration
++features[user_permission][] = view free_event registration
++features[user_permission][] = view own free_event registration
++features[user_permission][] = view own paid_event registration
++features[user_permission][] = view paid_event registration
++features[user_role][] = attendee manager
++features[variable][] = comment_anonymous_event
++features[variable][] = comment_default_mode_event
++features[variable][] = comment_default_per_page_event
++features[variable][] = comment_event
++features[variable][] = comment_form_location_event
++features[variable][] = comment_preview_event
++features[variable][] = comment_subject_field_event
++features[variable][] = menu_options_event
++features[variable][] = menu_parent_event
++features[variable][] = node_options_event
++features[variable][] = node_preview_event
++features[variable][] = node_submitted_event
+diff --git a/cod_events/cod_events.install b/cod_events/cod_events.install
+deleted file mode 100644
+index 47d3cd5..0000000
+--- a/cod_events/cod_events.install
++++ /dev/null
+@@ -1,30 +0,0 @@
+-<?php
+-/*
+- * Implementation of hook_enable().
+- */
+-function cod_events_enable() {
+-  cod_events_setup();
+-}
+-
+-/*
+- * Create a signup-enabled Event content type and product class.
+- */
+-function cod_events_setup() {
+-  watchdog('cod_events', t('Performing COD Events setup.'));
+-  // Create an event content type.
+-  module_load_include('admin.inc', 'uc_product');
+-  $form_state['values']['pcid'] = 'event';
+-  $form_state['values']['name'] = 'Event';
+-  $form_state['values']['description'] = 'Provides free and paid event registration on the Event content type.';
+-  global $user;
+-  $temp_user = $user;
+-  session_save_session(FALSE);
+-  $user = user_load(1);
+-  drupal_execute('uc_product_class_form', $form_state);
+-  $user = $temp_user;
+-  session_save_session(TRUE);
+-  // Rebuild features so that the event content type has the date field added.
+-  features_rebuild(array('cod_events' => array('content')));
+-  watchdog('cod_events', t('Finished COD Events setup.'));
+-  drupal_set_message(t('Finished COD events setup.'));
+-}
+\ No newline at end of file
+diff --git a/cod_events/cod_events.strongarm.inc b/cod_events/cod_events.strongarm.inc
+index d6ee3e8..9626038 100644
+--- a/cod_events/cod_events.strongarm.inc
++++ b/cod_events/cod_events.strongarm.inc
+@@ -1,45 +1,102 @@
+ <?php
++/**
++ * @file
++ * cod_events.strongarm.inc
++ */
+ 
+ /**
+- * Implementation of hook_strongarm().
++ * Implements hook_strongarm().
+  */
+ function cod_events_strongarm() {
+   $export = array();
+ 
+-  $strongarm = new stdClass;
++  $strongarm = new stdClass();
++  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
++  $strongarm->api_version = 1;
++  $strongarm->name = 'comment_anonymous_event';
++  $strongarm->value = 0;
++  $export['comment_anonymous_event'] = $strongarm;
++
++  $strongarm = new stdClass();
++  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
++  $strongarm->api_version = 1;
++  $strongarm->name = 'comment_default_mode_event';
++  $strongarm->value = 1;
++  $export['comment_default_mode_event'] = $strongarm;
++
++  $strongarm = new stdClass();
++  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
++  $strongarm->api_version = 1;
++  $strongarm->name = 'comment_default_per_page_event';
++  $strongarm->value = '50';
++  $export['comment_default_per_page_event'] = $strongarm;
++
++  $strongarm = new stdClass();
+   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+   $strongarm->api_version = 1;
+   $strongarm->name = 'comment_event';
+   $strongarm->value = '0';
+   $export['comment_event'] = $strongarm;
+ 
+-  $strongarm = new stdClass;
++  $strongarm = new stdClass();
+   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+   $strongarm->api_version = 1;
+-  $strongarm->name = 'signup_admin_list_view';
+-  $strongarm->value = 'cod_signup_user_vbo_admin_list:default';
+-  $export['signup_admin_list_view'] = $strongarm;
++  $strongarm->name = 'comment_form_location_event';
++  $strongarm->value = 1;
++  $export['comment_form_location_event'] = $strongarm;
+ 
+-  $strongarm = new stdClass;
++  $strongarm = new stdClass();
+   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+   $strongarm->api_version = 1;
+-  $strongarm->name = 'signup_date_field_event';
+-  $strongarm->value = 'field_dates';
+-  $export['signup_date_field_event'] = $strongarm;
++  $strongarm->name = 'comment_preview_event';
++  $strongarm->value = '1';
++  $export['comment_preview_event'] = $strongarm;
+ 
+-  $strongarm = new stdClass;
++  $strongarm = new stdClass();
+   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+   $strongarm->api_version = 1;
+-  $strongarm->name = 'signup_node_default_state_event';
+-  $strongarm->value = 'enabled_on';
+-  $export['signup_node_default_state_event'] = $strongarm;
++  $strongarm->name = 'comment_subject_field_event';
++  $strongarm->value = 1;
++  $export['comment_subject_field_event'] = $strongarm;
++
++  $strongarm = new stdClass();
++  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
++  $strongarm->api_version = 1;
++  $strongarm->name = 'menu_options_event';
++  $strongarm->value = array(
++    0 => 'main-menu',
++  );
++  $export['menu_options_event'] = $strongarm;
++
++  $strongarm = new stdClass();
++  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
++  $strongarm->api_version = 1;
++  $strongarm->name = 'menu_parent_event';
++  $strongarm->value = 'main-menu:0';
++  $export['menu_parent_event'] = $strongarm;
++
++  $strongarm = new stdClass();
++  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
++  $strongarm->api_version = 1;
++  $strongarm->name = 'node_options_event';
++  $strongarm->value = array(
++    0 => 'status',
++  );
++  $export['node_options_event'] = $strongarm;
++
++  $strongarm = new stdClass();
++  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
++  $strongarm->api_version = 1;
++  $strongarm->name = 'node_preview_event';
++  $strongarm->value = '0';
++  $export['node_preview_event'] = $strongarm;
+ 
+-  $strongarm = new stdClass;
++  $strongarm = new stdClass();
+   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+   $strongarm->api_version = 1;
+-  $strongarm->name = 'uc_product_shippable_event';
++  $strongarm->name = 'node_submitted_event';
+   $strongarm->value = 0;
+-  $export['uc_product_shippable_event'] = $strongarm;
++  $export['node_submitted_event'] = $strongarm;
+ 
+   return $export;
+ }
+diff --git a/cod_events/cod_events.views_default.inc b/cod_events/cod_events.views_default.inc
+deleted file mode 100644
+index 50cf681..0000000
+--- a/cod_events/cod_events.views_default.inc
++++ /dev/null
+@@ -1,367 +0,0 @@
+-<?php
+-
+-/**
+- * Implementation of hook_views_default_views().
+- */
+-function cod_events_views_default_views() {
+-  $views = array();
+-
+-  // Exported view: cod_signup_user_vbo_admin_list
+-  $view = new view;
+-  $view->name = 'cod_signup_user_vbo_admin_list';
+-  $view->description = 'Per-node signup administration interface with checkboxes for bulk operations.';
+-  $view->tag = 'signup';
+-  $view->view_php = '';
+-  $view->base_table = 'signup_log';
+-  $view->is_cacheable = FALSE;
+-  $view->api_version = 2;
+-  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+-  $handler = $view->new_display('default', 'Defaults', 'default');
+-  $handler->override_option('relationships', array(
+-    'nid' => array(
+-      'label' => 'Signup node',
+-      'required' => 1,
+-      'id' => 'nid',
+-      'table' => 'signup_log',
+-      'field' => 'nid',
+-      'relationship' => 'none',
+-    ),
+-    'uid' => array(
+-      'label' => 'Signup user',
+-      'required' => 1,
+-      'id' => 'uid',
+-      'table' => 'signup_log',
+-      'field' => 'uid',
+-      'relationship' => 'none',
+-    ),
+-  ));
+-  $handler->override_option('fields', array(
+-    'value' => array(
+-      'label' => 'First name',
+-      'alter' => array(
+-        'alter_text' => 0,
+-        'text' => '',
+-        'make_link' => 0,
+-        'path' => '',
+-        'link_class' => '',
+-        'alt' => '',
+-        'prefix' => '',
+-        'suffix' => '',
+-        'target' => '',
+-        'help' => '',
+-        'trim' => 0,
+-        'max_length' => '',
+-        'word_boundary' => 1,
+-        'ellipsis' => 1,
+-        'html' => 0,
+-        'strip_tags' => 0,
+-      ),
+-      'empty' => '',
+-      'hide_empty' => 0,
+-      'empty_zero' => 0,
+-      'link_to_user' => 1,
+-      'exclude' => 0,
+-      'id' => 'value',
+-      'table' => 'profile_values_profile_first',
+-      'field' => 'value',
+-      'relationship' => 'uid',
+-    ),
+-    'value_1' => array(
+-      'label' => 'Last name',
+-      'alter' => array(
+-        'alter_text' => 0,
+-        'text' => '',
+-        'make_link' => 0,
+-        'path' => '',
+-        'link_class' => '',
+-        'alt' => '',
+-        'prefix' => '',
+-        'suffix' => '',
+-        'target' => '',
+-        'help' => '',
+-        'trim' => 0,
+-        'max_length' => '',
+-        'word_boundary' => 1,
+-        'ellipsis' => 1,
+-        'html' => 0,
+-        'strip_tags' => 0,
+-      ),
+-      'empty' => '',
+-      'hide_empty' => 0,
+-      'empty_zero' => 0,
+-      'link_to_user' => 1,
+-      'exclude' => 0,
+-      'id' => 'value_1',
+-      'table' => 'profile_values_profile_last',
+-      'field' => 'value',
+-      'relationship' => 'uid',
+-    ),
+-    'name' => array(
+-      'label' => 'Username',
+-      'link_to_user' => 1,
+-      'exclude' => 0,
+-      'id' => 'name',
+-      'table' => 'users',
+-      'field' => 'name',
+-      'relationship' => 'uid',
+-    ),
+-    'value_2' => array(
+-      'label' => 'Organization',
+-      'alter' => array(
+-        'alter_text' => 0,
+-        'text' => '',
+-        'make_link' => 0,
+-        'path' => '',
+-        'link_class' => '',
+-        'alt' => '',
+-        'prefix' => '',
+-        'suffix' => '',
+-        'target' => '',
+-        'help' => '',
+-        'trim' => 0,
+-        'max_length' => '',
+-        'word_boundary' => 1,
+-        'ellipsis' => 1,
+-        'html' => 0,
+-        'strip_tags' => 0,
+-      ),
+-      'empty' => '',
+-      'hide_empty' => 0,
+-      'empty_zero' => 0,
+-      'link_to_user' => 1,
+-      'exclude' => 0,
+-      'id' => 'value_2',
+-      'table' => 'profile_values_profile_org',
+-      'field' => 'value',
+-      'relationship' => 'uid',
+-    ),
+-    'signup_time' => array(
+-      'label' => 'Signup time',
+-      'date_format' => 'small',
+-      'custom_date_format' => '',
+-      'exclude' => 0,
+-      'id' => 'signup_time',
+-      'table' => 'signup_log',
+-      'field' => 'signup_time',
+-      'relationship' => 'none',
+-    ),
+-    'attended' => array(
+-      'label' => 'Attendance',
+-      'alter' => array(
+-        'alter_text' => 0,
+-        'text' => '',
+-        'make_link' => 0,
+-        'path' => '',
+-        'link_class' => '',
+-        'alt' => '',
+-        'prefix' => '',
+-        'suffix' => '',
+-        'target' => '',
+-        'help' => '',
+-        'trim' => 0,
+-        'max_length' => '',
+-        'word_boundary' => 1,
+-        'ellipsis' => 1,
+-        'html' => 0,
+-        'strip_tags' => 0,
+-      ),
+-      'empty' => '',
+-      'hide_empty' => 0,
+-      'empty_zero' => 0,
+-      'exclude' => 0,
+-      'id' => 'attended',
+-      'table' => 'signup_log',
+-      'field' => 'attended',
+-      'relationship' => 'none',
+-    ),
+-  ));
+-  $handler->override_option('sorts', array(
+-    'value' => array(
+-      'order' => 'ASC',
+-      'id' => 'value',
+-      'table' => 'profile_values_profile_first',
+-      'field' => 'value',
+-      'relationship' => 'uid',
+-    ),
+-  ));
+-  $handler->override_option('arguments', array(
+-    'nid' => array(
+-      'default_action' => 'ignore',
+-      'style_plugin' => 'default_summary',
+-      'style_options' => array(),
+-      'wildcard' => 'all',
+-      'wildcard_substitution' => 'All',
+-      'title' => '',
+-      'default_argument_type' => 'fixed',
+-      'default_argument' => '',
+-      'validate_type' => 'signup_status',
+-      'validate_fail' => 'not found',
+-      'break_phrase' => 0,
+-      'not' => 0,
+-      'id' => 'nid',
+-      'table' => 'node',
+-      'field' => 'nid',
+-      'relationship' => 'nid',
+-      'default_options_div_prefix' => '',
+-      'default_argument_user' => 0,
+-      'default_argument_fixed' => '',
+-      'default_argument_php' => '',
+-      'validate_argument_node_access' => 0,
+-      'validate_argument_nid_type' => 'nid',
+-      'validate_argument_vocabulary' => array(),
+-      'validate_argument_type' => 'tid',
+-      'validate_argument_signup_status' => 'any',
+-      'validate_argument_signup_node_access' => 1,
+-      'validate_argument_php' => '',
+-    ),
+-  ));
+-  $handler->override_option('filters', array(
+-    'uid' => array(
+-      'operator' => 'not in',
+-      'value' => array(
+-        '0' => 0,
+-      ),
+-      'group' => '0',
+-      'exposed' => FALSE,
+-      'expose' => array(
+-        'operator' => FALSE,
+-        'label' => '',
+-      ),
+-      'id' => 'uid',
+-      'table' => 'users',
+-      'field' => 'uid',
+-      'relationship' => 'uid',
+-    ),
+-  ));
+-  $handler->override_option('access', array(
+-    'type' => 'perm',
+-    'perm' => 'administer all signups',
+-  ));
+-  $handler->override_option('cache', array(
+-    'type' => 'none',
+-  ));
+-  $handler->override_option('title', 'Check-in attendees');
+-  $handler->override_option('items_per_page', 0);
+-  $handler->override_option('use_pager', 0);
+-  $handler->override_option('style_plugin', 'bulk');
+-  $handler->override_option('style_options', array(
+-    'grouping' => '',
+-    'override' => 1,
+-    'sticky' => 0,
+-    'order' => 'asc',
+-    'columns' => array(
+-      'value' => 'value',
+-      'value_1' => 'value_1',
+-      'name' => 'name',
+-      'value_2' => 'value_2',
+-      'signup_time' => 'signup_time',
+-      'attended' => 'attended',
+-    ),
+-    'info' => array(
+-      'value' => array(
+-        'sortable' => 1,
+-        'separator' => '',
+-      ),
+-      'value_1' => array(
+-        'sortable' => 1,
+-        'separator' => '',
+-      ),
+-      'name' => array(
+-        'sortable' => 1,
+-        'separator' => '',
+-      ),
+-      'value_2' => array(
+-        'sortable' => 1,
+-        'separator' => '',
+-      ),
+-      'signup_time' => array(
+-        'sortable' => 1,
+-        'separator' => '',
+-      ),
+-      'attended' => array(
+-        'sortable' => 1,
+-        'separator' => '',
+-      ),
+-    ),
+-    'default' => '-1',
+-    'execution_type' => '1',
+-    'max_performance' => 0,
+-    'display_type' => '1',
+-    'hide_selector' => 0,
+-    'preserve_selection' => 1,
+-    'display_result' => 1,
+-    'merge_single_action' => 0,
+-    'operations' => array(
+-      'signup_cancel_action' => array(
+-        'selected' => 0,
+-        'skip_confirmation' => 0,
+-        'label' => '',
+-      ),
+-      'system_message_action' => array(
+-        'selected' => 0,
+-        'skip_confirmation' => 0,
+-        'label' => '',
+-      ),
+-      'views_bulk_operations_action' => array(
+-        'selected' => 0,
+-        'skip_confirmation' => 0,
+-        'label' => '',
+-      ),
+-      'views_bulk_operations_script_action' => array(
+-        'selected' => 0,
+-        'skip_confirmation' => 0,
+-        'label' => '',
+-      ),
+-      'signup_mark_attended_action' => array(
+-        'selected' => 1,
+-        'skip_confirmation' => 1,
+-        'label' => 'Attended',
+-      ),
+-      'signup_mark_not_attended_action' => array(
+-        'selected' => 1,
+-        'skip_confirmation' => 1,
+-        'label' => 'Did not attend',
+-      ),
+-      'views_bulk_operations_argument_selector_action' => array(
+-        'selected' => 0,
+-        'skip_confirmation' => 0,
+-        'label' => '',
+-      ),
+-      'system_goto_action' => array(
+-        'selected' => 0,
+-        'skip_confirmation' => 0,
+-        'label' => '',
+-      ),
+-      'system_send_email_action' => array(
+-        'selected' => 0,
+-        'skip_confirmation' => 0,
+-        'label' => '',
+-      ),
+-      'views_send_mail_action' => array(
+-        'selected' => 0,
+-        'skip_confirmation' => 0,
+-        'label' => '',
+-      ),
+-    ),
+-  ));
+-  $handler = $view->new_display('page', 'Page', 'page_1');
+-  $handler->override_option('path', 'conference-admin/checkin');
+-  $handler->override_option('menu', array(
+-    'type' => 'normal',
+-    'title' => 'Check-in attendees',
+-    'description' => '',
+-    'weight' => '0',
+-    'name' => 'menu-conference-admin',
+-  ));
+-  $handler->override_option('tab_options', array(
+-    'type' => 'none',
+-    'title' => '',
+-    'description' => '',
+-    'weight' => 0,
+-    'name' => 'navigation',
+-  ));
+-
+-  $views[$view->name] = $view;
+-
+-  return $views;
+-}
