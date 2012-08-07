@@ -1,0 +1,35 @@
+name = Jakarta
+core = 7.x
+description = drupalcampindonesia.com
+engine = phptemplate
+base theme = tao
+
+
+; Regions =====================================================================
+
+regions[sidebar_first] = Sidebar first
+regions[sidebar_second] = Sidebar second
+regions[content] = Content
+regions[content_bottom] = Content bottom
+regions[header] = Header
+regions[utility] = Utility
+regions[navbar] = Navbar
+regions[help] = Help
+regions[footer] = Footer
+regions[page_top] = Page top
+regions[page_bottom] = Page bottom
+regions[highlighted] = Highlighted
+
+; Stylesheets =================================================================
+
+stylesheets[all][] = "css/style.css"
+stylesheets[all][] = "css/nodes.css"
+stylesheets[all][] = "css/buttons.css"
+
+; JavaScripts =================================================================
+
+scripts[] = "js/scripts.js"
+scripts[] = "js/jquery.jscrollpane.min.js"
+scripts[] = js/jquery.mousewheel.js
+scripts[] = js/mwheelIntent.js
+
