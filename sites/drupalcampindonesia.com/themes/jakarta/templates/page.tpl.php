@@ -58,4 +58,4 @@
 </div></div>
 
 
-<a href="http://en.wikipedia.org/wiki/File:Brazil_-_SP.jpg" id="imagecopyright" target="_blank">[Image source]</a>
+<a href="http://en.wikipedia.org/wiki/File:Jakarta-Panorama.jpg" id="imagecopyright" target="_blank">[Image source]</a>

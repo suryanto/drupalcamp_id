@@ -29,7 +29,3 @@ stylesheets[all][] = "css/buttons.css"
 ; JavaScripts =================================================================
 
 scripts[] = "js/scripts.js"
-scripts[] = "js/jquery.jscrollpane.min.js"
-scripts[] = js/jquery.mousewheel.js
-scripts[] = js/mwheelIntent.js
-
