@@ -1,0 +1,13 @@
+<?php
+/**
+ * CTools hook implementations.
+ *
+ * @author fireh <dozymoe@824484.no-reply.drupal.org>
+ */
+
+/**
+ * Implements hook_ctools_plugin_directory().
+ */
+function dci_chaos_ctools_plugin_directory($owner, $plugin_type) {
+  return 'plugins/' . $plugin_type;
+}

@@ -1,0 +1,8 @@
+name = DrupalCamp Indonesia CTools Plugins
+description = Collection of CTools Plugins
+package = DrupalCamp Indonesia
+core = 7.x
+
+dependencies[] = ctools
+
+version = 7.x-1.x

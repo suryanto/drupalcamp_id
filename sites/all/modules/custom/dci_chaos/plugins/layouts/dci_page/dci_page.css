@@ -1,0 +1,241 @@
+html {
+  font-size: 100%;
+}
+
+body {
+  background: white url("/sites/beta.drupalcampindonesia.com/files/images/background-banner.jpg");
+  color: #444444;
+  font: 0.875em/1.5 sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  background-color: white;
+  color: #0173ba;
+}
+
+a img {
+  display: block;
+}
+
+nav ul, nav ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.banner-content h1, .banner-content h2, .banner-content h3, .banner-content h4, .banner-content h5, .banner-content h6 {
+  background-color: transparent;
+}
+.banner-content .views-slideshow-pager-fields {
+  padding: 18px 0;
+  position: relative;
+  text-align: center;
+  z-index: 4;
+}
+.banner-content .views-slideshow-pager-field-item {
+  background-color: white;
+  border-radius: 8px;
+  display: inline-block;
+  height: 16px;
+  width: 16px;
+  margin: 0 .5em;
+  padding: 0;
+}
+.banner-content .views-slideshow-pager-field-item.active {
+  background-color: #0173ba;
+}
+
+.centerwrap-main {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 72em;
+  padding: 2em 0;
+}
+.centerwrap-main.has-sidebar .main-wrap {
+  margin-left: 0.714em;
+  margin-right: 0.714285714rem;
+  max-width: 42.946em;
+  min-width: 16.321em;
+}
+
+.main-wrap, .sidebar-last {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.main-wrap {
+  margin-left: 0.714em;
+  margin-right: 0.714285714rem;
+  max-width: 70.571em;
+  min-width: 16.571em;
+}
+
+.sidebar-last {
+  margin-left: 0.714em;
+  margin-right: 0.714285714rem;
+  max-width: 25.196em;
+}
+
+footer {
+  border-top: 2px solid white;
+}
+
+.centerwrap-footer, .centerwrap-footer-extra {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 72em;
+  overflow: hidden;
+}
+
+.centerwrap-footer {
+  padding: 1em 0 3em;
+}
+
+.footer-1col, .footer-2col, .footer-3col, .footer-4col, .footer-extra-1st, .footer-extra-2nd {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.footer-1col {
+  margin-left: 0.714em;
+  margin-right: 0.714285714rem;
+  max-width: 70.571em;
+  min-width: 16.571em;
+}
+
+.footer-2col {
+  margin-left: 0.714em;
+  margin-right: 0.714285714rem;
+  max-width: 34.071em;
+  min-width: 16.321em;
+}
+
+.footer-3col {
+  margin-left: 0.714em;
+  margin-right: 0.714285714rem;
+  max-width: 20.446em;
+  min-width: 16.071em;
+}
+
+.footer-4col {
+  margin-left: 0.714em;
+  margin-right: 0.714285714rem;
+  max-width: 15.821em;
+  min-width: 15.821em;
+}
+
+.centerwrap-footer a {
+  color: #444444;
+}
+.centerwrap-footer h2, .centerwrap-footer h3 {
+  background-color: transparent;
+  font-weight: normal;
+}
+.centerwrap-footer ul.menu, .centerwrap-footer ul.menu li {
+  list-style: none;
+  padding: 0;
+}
+.centerwrap-footer ul.menu {
+  margin: 0;
+}
+.centerwrap-footer ul.menu li {
+  margin: 1em 0;
+}
+
+.footer-extra {
+  background-color: #c70000;
+  color: white;
+  line-height: 1;
+  padding: 1em 0;
+}
+.footer-extra p {
+  margin: 0;
+}
+.footer-extra p a {
+  color: #ffcc00;
+}
+.footer-extra ul.menu {
+  font-size: 0.8125em;
+  list-style: none;
+  text-align: center;
+  text-transform: uppercase;
+}
+.footer-extra ul.menu a {
+  color: white;
+  padding: 0 1.5em;
+}
+.footer-extra ul.menu a:active, .footer-extra ul.menu a:hover {
+  background-color: #fa0000;
+}
+.footer-extra ul.menu li {
+  border-left: 1px solid white;
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0;
+}
+.footer-extra ul.menu li:first-child {
+  border-left: none;
+}
+
+.sidebar-last .sidebar {
+  background: white;
+  padding: 2em 1em;
+}
+.sidebar-last h2 {
+  background: #c70000;
+  color: white;
+  font-weight: normal;
+  left: -0.667em;
+  line-height: 2.86em;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  text-align: center;
+  text-transform: uppercase;
+  vertical-align: middle;
+  width: 80%;
+  z-index: 0;
+}
+.sidebar-last h2:after {
+  content: "";
+  border-color: #c70000 transparent #c70000 #c70000;
+  border-style: solid;
+  border-width: 1.43em;
+  position: absolute;
+  right: -1.43em;
+  top: 0;
+  z-index: -1;
+}
+.sidebar-last li {
+  border-top: 1px solid #e6e6e6;
+  padding-top: 1em;
+}
+.sidebar-last li:first-child {
+  border: none;
+}
+.sidebar-last .user-info {
+  overflow: hidden;
+}
+.sidebar-last .user-name {
+  background: white;
+  color: #0173ba;
+  font-size: 1.25em;
+  margin: 0;
+  text-transform: uppercase;
+}
+.sidebar-last .user-picture {
+  float: left;
+  margin: .5em;
+}
+.sidebar-last .user-title {
+  background: white;
+  color: #c70000;
+  margin: 0;
+}
+.sidebar-last ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
