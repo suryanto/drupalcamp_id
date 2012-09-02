@@ -1,61 +1,58 @@
 [role=banner] {
-  background: white url("/sites/beta.drupalcampindonesia.com/files/images/background-header.jpg") repeat-x 0 0;
-  color: #444444;
+  background: #fff url("/sites/beta.drupalcampindonesia.com/files/images/background-header.jpg") repeat-x 0 0;
+  color: #444;
   padding: 24px 0 0 0;
 }
-
 .header-wrap {
-  background-color: white;
+  background-color: #fff;
   margin-left: auto;
   margin-right: auto;
-  max-width: 72em;
+  max-width: 72.0000em;
 }
-
 .header-content {
-  color: black;
-  margin-left: 0.714em;
-  margin-right: 0.714285714rem;
-  max-width: 70.571em;
+  color: #000;
+  max-width: 70.5714em;
   padding-bottom: 18px;
 }
 .header-content #logo {
   float: left;
-  margin-right: 10px;
+  margin-right: 0.7143em;
 }
-.header-content .logo-wrap, .header-content nav {
+.header-content .logo-wrap,
+.header-content nav {
   display: inline-block;
   padding: 0;
 }
 .header-content .logo-wrap {
-  margin-left: 0.714em;
-  margin-right: 0.714285714rem;
-  max-width: 25.196em;
+  margin-left: 0.7143em;
+  margin-right: 0.7143em;
+  max-width: 25.0714em;
 }
 .header-content .logo {
-  background-color: white;
+  background-color: #fff;
   color: #0173ba;
   font-size: 1.75em;
   text-transform: uppercase;
 }
 .header-content .site-event {
-  background-color: white;
-  color: black;
+  background-color: #fff;
+  color: #000;
 }
 .header-content .site-regional {
   font-size: 1.25em;
 }
 .header-content nav {
-  margin-left: 0.714em;
-  margin-right: 0.714285714rem;
-  max-width: 51.821em;
+  margin-left: 0.7143em;
+  margin-right: 0.7143em;
+  max-width: 43.0714em;
   text-transform: uppercase;
 }
 .header-content nav a {
-  background-color: white;
+  background-color: #fff;
   color: #0173ba;
   display: block;
   line-height: 4;
-  padding: 24px .25em 0;
+  padding: 24px 0.25em 0;
 }
 .header-content nav li {
   float: left;
@@ -64,23 +61,23 @@
 }
 .header-content nav li li {
   background-color: #0173ba;
-  color: white;
+  color: #fff;
 }
 .header-content nav li li a {
   background-color: #0173ba;
-  color: white;
+  color: #fff;
   line-height: 2;
   padding-top: 0;
 }
 .header-content nav li li a:hover {
-  background: #017bc7 url("/sites/beta.drupalcampindonesia.com/files/images/list-star.jpg") no-repeat 16px 7px;
+  background: #0192ed url("/sites/beta.drupalcampindonesia.com/files/images/list-star.jpg") no-repeat 16px 7px;
 }
 .header-content nav li ul {
   background: tranparent;
   padding: 24px 0;
   top: 100% !important;
 }
-.header-content nav li ul::before {
+.header-content nav li ul:before {
   border-color: transparent transparent #0173ba;
   border-style: solid;
   border-width: 16px 8px;
@@ -91,7 +88,7 @@
 }
 .header-content nav li:hover a {
   background-color: #c70000;
-  color: white;
+  color: #fff;
 }
 .header-content .sf-menu li li a {
   background-color: transparent;
@@ -100,23 +97,50 @@
 .header-content .sf-menu ul {
   top: 100%;
 }
-
+.backwrap-banner,
+.banner-content .views-slideshow-pager-fields {
+  background: #fff url("/sites/beta.drupalcampindonesia.com/files/images/background-banner.jpg");
+  color: #000;
+}
+.backwrap-banner {
+  border-bottom: 1px solid #d3d3d3;
+  position: relative;
+  z-index: 0;
+}
+.backwrap-banner:before {
+  background: url("/sites/beta.drupalcampindonesia.com/files/images/monas-left.png") no-repeat 0 0, url("/sites/beta.drupalcampindonesia.com/files/images/monas-right.png") no-repeat 100% 0;
+  background-color: #fff;
+  content: "";
+  height: 150px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: -1;
+}
 .centerwrap-banner {
   margin-left: auto;
   margin-right: auto;
-  max-width: 72em;
+  max-width: 72.0000em;
 }
-
 .banner-wrap {
-  margin-left: 0.714em;
-  margin-right: 0.714285714rem;
-  max-width: 70.571em;
+  margin-left: 0.7143em;
+  margin-right: 0.7143em;
+  max-width: 70.5714em;
 }
-
 .banner-content {
-  font-size: .8571em;
+  background-color: #f2f2f2;
+  font-size: 0.8571em;
   overflow: hidden;
   position: relative;
+}
+.banner-content h1,
+.banner-content h2,
+.banner-content h3,
+.banner-content h4,
+.banner-content h5,
+.banner-content h6 {
+  background-color: transparent;
 }
 .banner-content h2 {
   font-size: 1.75em;
@@ -127,37 +151,10 @@
 .banner-content p {
   line-height: 1.75;
 }
-
-.banner-content {
-  background-color: #f2f2f2;
-}
-
-.backwrap-banner, .banner-content .views-slideshow-pager-fields {
-  background: white url("/sites/beta.drupalcampindonesia.com/files/images/background-banner.jpg");
-  color: #444444;
-}
-
-.backwrap-banner {
-  border-bottom: 1px solid lightgray;
-  position: relative;
-  z-index: 0;
-}
-
-.backwrap-banner::before {
-  background: url("/sites/beta.drupalcampindonesia.com/files/images/monas-left.png") no-repeat 0 0, url("/sites/beta.drupalcampindonesia.com/files/images/monas-right.png") no-repeat 100% 0 white;
-  content: "";
-  height: 150px;
-  left: 0;
-  position: absolute;
-  top: 0;
-  width: 100%;
-  z-index: -1;
-}
-
-.banner-content h2, .banner-content h3 {
+.banner-content h2,
+.banner-content h3 {
   line-height: 1;
 }
-
 .banner-content .views-field-field-image {
   position: absolute;
   right: 0;
@@ -165,11 +162,11 @@
   z-index: -1;
 }
 .banner-content .banner-body {
-  background-color: #F2F2F2;
-  background-color: rgba(242, 242, 242, 0.85);
-  margin-left: 0.714em;
-  margin-right: 0.714285714rem;
-  max-width: 25.571em;
+  background-color: #f2f2f2;
+  background-color: rgba(242,242,242,0.85);
+  margin-left: 0.7143em;
+  margin-right: 0.7143em;
+  max-width: 25.5714em;
 }
 .banner-content .views-field-body {
   margin-bottom: 112px;
@@ -195,8 +192,26 @@
   background: url("/sites/beta.drupalcampindonesia.com/files/images/pager-next.png") transparent;
   right: 0;
 }
-
 .banner-content .views-slideshow-cycle-main-frame,
 .banner-content .views-slideshow-cycle-main-frame-row {
   width: 100% !important;
 }
+.banner-content .views-slideshow-pager-fields {
+  padding: 18px 0;
+  position: relative;
+  text-align: center;
+  z-index: 4;
+}
+.banner-content .views-slideshow-pager-field-item {
+  background-color: #fff;
+  border-radius: 8px;
+  display: inline-block;
+  height: 16px;
+  margin: 0 0.5em;
+  padding: 0;
+  width: 16px;
+}
+.banner-content .views-slideshow-pager-field-item.active {
+  background-color: #0173ba;
+}
+
