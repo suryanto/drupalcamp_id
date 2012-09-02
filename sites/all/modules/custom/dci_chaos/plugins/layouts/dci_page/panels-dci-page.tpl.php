@@ -97,7 +97,7 @@
 
   if ($footer_count !== 0 || $footer_extra_count !== 0):
 ?>
-<footer>
+<footer class="page-footer">
   <?php if ($footer_count !== 0): ?>
   <div class="centerwrap-footer">
     <?php if ($content['footer-1st']): ?>

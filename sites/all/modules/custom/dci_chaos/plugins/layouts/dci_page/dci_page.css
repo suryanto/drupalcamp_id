@@ -54,9 +54,9 @@ li > *:last-child {
   margin-right: 0.7143em;
   max-width: 70.5714em;
   min-width: 16.5714em;
-  width: 100%;
 }
 .sidebar-last {
+  float: right;
   margin-left: 0.7143em;
   margin-right: 0.7143em;
   max-width: 25.0714em;
@@ -120,6 +120,9 @@ li > *:last-child {
   list-style: none;
   margin: 0;
   padding: 0;
+}
+.page-footer {
+  clear: both;
 }
 footer {
   border-top: 2px solid #fff;
