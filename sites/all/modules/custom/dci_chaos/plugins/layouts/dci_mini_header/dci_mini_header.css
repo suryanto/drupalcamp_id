@@ -52,7 +52,8 @@
   color: #0173ba;
   display: block;
   line-height: 4;
-  padding: 24px 0.25em 0;
+  padding: 24px 1em 0;
+  text-decoration: none;
 }
 .header-content nav li {
   float: left;
