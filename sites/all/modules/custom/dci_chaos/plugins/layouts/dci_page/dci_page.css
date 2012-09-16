@@ -402,9 +402,6 @@ li > *:last-child {
   vertical-align: middle;
 }
 .sidebar-last .view-keynote-speakers li {
-  border-bottom: 1px solid #e6e6e6;
-  display: inline-block;
-  max-width: 23em;
   padding-top: 1em;
 }
 .sidebar-last .view-keynote-speakers ul {
@@ -538,11 +535,11 @@ aside .twitter-acct img {
   width: 100%;
 }
 @media only screen and (min-width: 30em) {
-  .sidebar-last .user-info {
-    overflow: hidden;
-  }
-  .sidebar-last .user-picture {
-    float: left;
+  .sidebar-last .view-keynote-speakers li {
+    display: inline-block;
+    padding-top: 1em;
+    vertical-align: top;
+    width: 49%;
   }
 }
 @media only screen and (min-width: 35em) {
@@ -577,6 +574,12 @@ aside .twitter-acct img {
     top: 0;
     z-index: -1;
   }
+  .sidebar-last .user-info {
+    overflow: hidden;
+  }
+  .sidebar-last .user-picture {
+    float: left;
+  }
 }
 @media only screen and (min-width: 60em) {
   .centerwrap-main.has-sidebar .main-wrap {
@@ -591,8 +594,9 @@ aside .twitter-acct img {
     float: right;
     max-width: 25.0714em;
   }
-  .view-keynote-speakers li {
+  .sidebar-last .view-keynote-speakers li {
     display: block;
+    width: auto;
   }
 }
 @media only screen and (max-width: 23em) {
