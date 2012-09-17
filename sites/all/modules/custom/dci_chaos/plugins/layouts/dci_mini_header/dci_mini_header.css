@@ -20,6 +20,8 @@
 .header-content .logo-wrap,
 .header-content nav {
   display: inline-block;
+  zoom: 1;
+  *display: inline;
   padding: 0;
 }
 .header-content .logo-wrap {
@@ -139,6 +141,7 @@
   font-size: 0.8571em;
   overflow: hidden;
   position: relative;
+  zoom: 1;
 }
 .banner-content h1,
 .banner-content h2,
@@ -222,6 +225,8 @@
   background-color: #fff;
   border-radius: 8px;
   display: inline-block;
+  zoom: 1;
+  *display: inline;
   height: 16px;
   margin: 0 0.5em;
   padding: 0;

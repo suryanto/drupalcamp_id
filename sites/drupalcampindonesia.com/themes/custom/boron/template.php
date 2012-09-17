@@ -61,6 +61,11 @@ function boron_preprocess_html(&$vars) {
  //If the theme setting for adding the html5shim is checked, set the variable.
  if ($shimset == 1) { $vars['html5shim'] = "\n<!--[if lt IE 9]>\n" . $script . "<![endif]-->\n"; }
 
+  drupal_add_js(drupal_get_path('theme', 'boron') . '/js/respond.min.js', array(
+    'scope' => 'header',
+    'group' => JS_THEME,
+    'every_page' => TRUE,
+  ));
 }
 
 /**
