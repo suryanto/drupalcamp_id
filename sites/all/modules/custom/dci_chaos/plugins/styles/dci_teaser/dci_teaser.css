@@ -1,3 +1,14 @@
+.article-teasers li {
+  *zoom: 1;
+}
+.article-teasers li:before,
+.article-teasers li:after {
+  content: "";
+  display: table;
+}
+.article-teasers li:after {
+  clear: both;
+}
 .article-teasers ol,
 .article-teasers ul {
   list-style-type: none;

@@ -10,6 +10,17 @@
   max-width: 72.0000em;
 }
 .header-content {
+  *zoom: 1;
+}
+.header-content:before,
+.header-content:after {
+  content: "";
+  display: table;
+}
+.header-content:after {
+  clear: both;
+}
+.header-content {
   color: #000;
   padding-bottom: 18px;
 }
@@ -60,7 +71,7 @@
 @media only screen and (min-width: 35em) {
   .header-content nav a {
     line-height: 4;
-    padding: 24px 1em 0;
+    padding: 24px 0.75em 0;
   }
 }
 .header-content nav li {

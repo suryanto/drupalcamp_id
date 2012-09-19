@@ -584,6 +584,9 @@ aside .twitter-acct img {
     top: 0;
     z-index: -1;
   }
+  .sidebar-last .view-keynote-speakers li {
+    clear: both;
+  }
   .sidebar-last .user-info {
     overflow: hidden;
   }
@@ -637,6 +640,9 @@ aside .twitter-acct img {
   }
   tr.card-display td {
     display: block;
+  }
+  .view-attendees .card-display {
+    clear: both;
   }
   .view-attendees .card-display .views-field-picture {
     float: left;
