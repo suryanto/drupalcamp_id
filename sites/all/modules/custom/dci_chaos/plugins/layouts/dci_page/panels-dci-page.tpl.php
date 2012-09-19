@@ -27,10 +27,8 @@
 <?php if ($content['header'] || $content['banner']): ?>
 <header role="banner">
   <?php if ($content['header']): ?>
-    <div class="centerwrap-header">
-      <div class="header-wrap">
-        <div class="header-content"><?php print $content['header']; ?></div>
-      </div>
+    <div class="header-wrap">
+      <div class="header-content"><?php print $content['header']; ?></div>
     </div>
   <?php endif; ?>
 

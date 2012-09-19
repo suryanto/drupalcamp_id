@@ -1,10 +1,11 @@
 [role=banner] {
   background: #fff url("images/background-header.jpg") repeat-x 0 0;
   color: #444;
-  padding: 24px 0 0 0;
+  padding: 21px 0 0 0;
 }
 .header-wrap {
   background-color: #fff;
+  margin-bottom: 1.5em;
   margin-left: auto;
   margin-right: auto;
   max-width: 72.0000em;
@@ -22,11 +23,13 @@
 }
 .header-content {
   color: #000;
-  padding-bottom: 18px;
 }
 .header-content #logo {
   float: left;
   margin-right: 0.7143em;
+}
+.header-content #logo img {
+  height: 3.5em;
 }
 .header-content .logo-wrap,
 .header-content nav {
@@ -36,14 +39,18 @@
   padding: 0;
 }
 .header-content .logo-wrap {
+  margin-bottom: 0.5em;
   margin-left: 0.7143em;
   margin-right: 0.7143em;
-  margin-top: 8px;
+  margin-top: 0.75em;
 }
 .header-content .logo {
   background-color: #fff;
   color: #0173ba;
-  font-size: 1.75em;
+  font-size: 1.714em;
+  font-weight: bold;
+  letter-spacing: -0.05em;
+  line-height: 1.75;
   text-transform: uppercase;
 }
 .header-content .site-event {
@@ -52,6 +59,7 @@
 }
 .header-content .site-regional {
   font-size: 1.25em;
+  line-height: 1.4;
 }
 .header-content nav {
   margin-left: 0.7143em;
@@ -62,7 +70,7 @@
   background-color: #fff;
   color: #0173ba;
   display: block;
-  line-height: 2;
+  line-height: 1.5;
   padding-left: 0.25em;
   padding-right: 0.25em;
   text-decoration: none;
@@ -71,7 +79,7 @@
 @media only screen and (min-width: 35em) {
   .header-content nav a {
     line-height: 4;
-    padding: 24px 0.75em 0;
+    padding: 2em 0.75em 0;
   }
 }
 .header-content nav li {
