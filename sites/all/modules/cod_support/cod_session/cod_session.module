@@ -185,12 +185,12 @@ function cod_session_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'session_node_form') {
     if (isset($form['field_speakers'])) {
       // Form tweaks for the Speakers field:
-      $form['field_speakers'][LANGUAGE_NONE]['add_more']['#value'] = t('Add another speaker');
+      $form['field_speakers']['id']['add_more']['#value'] = t('Add another speaker');
       // Prepopulate the current user into the Speakers field
       // on new session creation.
       if (empty($form['#node']->nid)) {
         global $user;
-        $form['field_speakers'][LANGUAGE_NONE][0]['uid']['#default_value'] = $user->uid;
+        $form['field_speakers']['id'][0]['uid']['#default_value'] = $user->uid;
       }
     }
   }
@@ -469,14 +469,14 @@ function cod_session_is_scheduled($node) {
 * Helper function to determine whether a session is accepted.
 */
 function cod_session_is_accepted($node) {
-  return $node->field_accepted[LANGUAGE_NONE][0]['value'] == 1;
+  return $node->field_accepted['id'][0]['value'] == 1;
 }
 
 /**
 * Helper function to determine whether a session is declined.
 */
 function cod_session_is_declined($node) {
-  return $node->field_accepted[LANGUAGE_NONE][0]['value'] == 2;
+  return $node->field_accepted['id'][0]['value'] == 2;
 }
 /**
  * Helper function to determien whether a given user is a speaker on a session.
@@ -486,7 +486,7 @@ function cod_session_user_is_speaker($uid, $node) {
   if (empty($node->field_speakers)) {
     return FALSE;
   }
-  foreach($node->field_speakers[LANGUAGE_NONE] as $speaker) {
+  foreach($node->field_speakers['id'] as $speaker) {
     if ($speaker['target_id'] == $uid)  {
       return TRUE;
     }
@@ -496,9 +496,9 @@ function cod_session_user_is_speaker($uid, $node) {
  * Implements hook_node_presave().
  */
 function cod_session_node_presave($node) {
-  if (!empty($node->field_session_slot[LANGUAGE_NONE][0]['nid']) && !empty($node->field_session_room[LANGUAGE_NONE][0]['nid'])) {
-    $room = node_load($node->field_session_room[LANGUAGE_NONE][0]['nid']);
-    $slot = node_load($node->field_session_slot[LANGUAGE_NONE][0]['nid']);
+  if (!empty($node->field_session_slot['id'][0]['nid']) && !empty($node->field_session_room['id'][0]['nid'])) {
+    $room = node_load($node->field_session_room['id'][0]['nid']);
+    $slot = node_load($node->field_session_slot['id'][0]['nid']);
     drupal_set_message(t('%name is scheduled for @slot in @room', array('%name' => $node->title, '@slot' => $slot->title, '@room' => $room->title)));
   }
 }
@@ -529,8 +529,8 @@ function cod_session_node_validate($node, $form, &$form_state) {
     $capacity = 0;
     if (count($rooms) == 1) {
       $room = current($rooms);
-      if (isset($room->field_room_session_capacity[LANGUAGE_NONE][0]['value'])) {
-        $capacity = $room->field_room_session_capacity[LANGUAGE_NONE][0]['value'];
+      if (isset($room->field_room_session_capacity['id'][0]['value'])) {
+        $capacity = $room->field_room_session_capacity['id'][0]['value'];
       }
     }
 
@@ -757,7 +757,7 @@ function template_preprocess_cod_session_schedule(&$vars) {
     // Explicitly get room capacity.
     $node = node_load($room_nid);
     if (!empty($node->field_room_session_capacity)) {
-      $capacity = check_plain($node->field_room_session_capacity[LANGUAGE_NONE][0]['value']);
+      $capacity = check_plain($node->field_room_session_capacity['id'][0]['value']);
     }
     else {
       $capacity = 1;
@@ -1196,10 +1196,10 @@ function _cod_session_machine_keys($prefix, $keys) {
 function cod_session_time_slot_format($slot) {
   static $ranges = array();
   if (!isset($ranges[$slot->nid])) {
-    $date_start = new DateObject($slot->field_slot_datetime[LANGUAGE_NONE][0]['value'], $slot->field_slot_datetime[LANGUAGE_NONE][0]['timezone_db']);
-    $date_end = new DateObject($slot->field_slot_datetime[LANGUAGE_NONE][0]['value2'], $slot->field_slot_datetime[LANGUAGE_NONE][0]['timezone_db']);
-    date_timezone_set($date_start, timezone_open($slot->field_slot_datetime[LANGUAGE_NONE][0]['timezone']));
-    date_timezone_set($date_end, timezone_open($slot->field_slot_datetime[LANGUAGE_NONE][0]['timezone']));
+    $date_start = new DateObject($slot->field_slot_datetime['id'][0]['value'], $slot->field_slot_datetime['id'][0]['timezone_db']);
+    $date_end = new DateObject($slot->field_slot_datetime['id'][0]['value2'], $slot->field_slot_datetime['id'][0]['timezone_db']);
+    date_timezone_set($date_start, timezone_open($slot->field_slot_datetime['id'][0]['timezone']));
+    date_timezone_set($date_end, timezone_open($slot->field_slot_datetime['id'][0]['timezone']));
     $day = date_format_date($date_start, 'custom', 'F j');
     $start = date_format_date($date_start, 'custom', 'g:iA');
     $end = date_format_date($date_end, 'custom', 'g:iA');
