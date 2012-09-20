@@ -37,6 +37,7 @@
   zoom: 1;
   *display: inline;
   padding: 0;
+  vertical-align: top;
 }
 .header-content .logo-wrap {
   margin-bottom: 0.5em;
@@ -172,6 +173,8 @@
 }
 .banner-content h2 {
   font-size: 1.75em;
+  margin: 0.75em 0;
+  padding: 0.25em 0;
 }
 .banner-content .summary {
   font-weight: bold;
@@ -194,9 +197,11 @@
   background-color: rgba(255,255,255,0.7);
   margin-left: 0.7143em;
   margin-right: 0.7143em;
+  overflow: hidden;
+  padding: 0 0.5em;
 }
 .banner-content .views-field-body {
-  margin-bottom: 112px;
+  margin-bottom: 8.75em;
 }
 .banner-content .views-slideshow-controls-text-next a,
 .banner-content .views-slideshow-controls-text-pause,
@@ -205,7 +210,7 @@
 }
 .banner-content .views-slideshow-controls-text-previous,
 .banner-content .views-slideshow-controls-text-next {
-  bottom: 82px;
+  bottom: 78px;
   height: 82px;
   position: absolute;
   width: 82px;
@@ -235,21 +240,22 @@
   width: 100% !important;
 }
 .banner-content .views-slideshow-pager-fields {
-  padding: 18px 0;
+  padding: 1.75em 0;
   position: relative;
   text-align: center;
   z-index: 4;
 }
 .banner-content .views-slideshow-pager-field-item {
   background-color: #fff;
-  border-radius: 8px;
+  border-radius: 1em;
   display: inline-block;
   zoom: 1;
   *display: inline;
-  height: 16px;
+  height: 1.75em;
   margin: 0 0.5em;
   padding: 0;
-  width: 16px;
+  vertical-align: top;
+  width: 1.75em;
 }
 .banner-content .views-slideshow-pager-field-item.active {
   background-color: #0173ba;
@@ -269,7 +275,7 @@
   }
   .banner-content .banner-body {
     max-width: 25.5714em;
-    min-height: 22em;
+    min-height: 21.3em;
   }
 }
 

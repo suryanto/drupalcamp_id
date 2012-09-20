@@ -352,6 +352,9 @@ body {
   margin: 0;
   padding: 0;
 }
+p {
+  margin: 1.5em 0;
+}
 h1,
 h2,
 h3,
@@ -360,6 +363,12 @@ h5,
 h6 {
   background-color: #fff;
   color: #0173ba;
+}
+h2 {
+  font-size: 1.5em;
+  line-height: 1;
+  margin: 1em 0;
+  padding: 0.5em 0;
 }
 a img {
   display: block;
@@ -370,14 +379,8 @@ nav ol {
   margin: 0;
   padding: 0;
 }
-li > *:first-child {
-  margin-top: 0;
-}
-li > *:last-child {
-  margin-bottom: 0;
-}
 .centerwrap-main {
-  padding-top: 2em;
+  padding-top: 1.5em;
 }
 .main-wrap,
 .sidebar-last {
@@ -386,25 +389,24 @@ li > *:last-child {
   *display: inline;
   margin-left: 0.7143em;
   margin-right: 0.7143em;
-  margin-bottom: 2em;
+  margin-bottom: 1.5em;
   vertical-align: top;
 }
 .sidebar-last .sidebar {
   background: #fff;
-  padding: 2em 1em;
+  padding: 1.5em 1em;
 }
 .sidebar-last h2 {
   background: #c70000;
   color: #fff;
   font-weight: normal;
   margin: 0;
-  padding: 0;
   text-align: center;
   text-transform: uppercase;
   vertical-align: middle;
 }
 .sidebar-last .view-keynote-speakers li {
-  padding-top: 1em;
+  padding-top: 1.5em;
 }
 .sidebar-last .view-keynote-speakers ul {
   list-style: none;
@@ -414,12 +416,13 @@ li > *:last-child {
 .sidebar-last .user-name {
   background: #fff;
   color: #0173ba;
-  font-size: 1.25em;
+  font-size: 1.286em;
+  line-height: 1.167em;
   margin: 0;
   text-transform: uppercase;
 }
 .sidebar-last .user-picture {
-  margin: 0.5em;
+  margin-right: 1em;
 }
 .sidebar-last .user-title {
   background: #fff;
@@ -427,10 +430,8 @@ li > *:last-child {
   margin: 0;
 }
 .page-footer {
-  clear: both;
-}
-footer {
   border-top: 2px solid #fff;
+  clear: both;
 }
 .centerwrap-footer,
 .centerwrap-footer-extra {
@@ -440,7 +441,7 @@ footer {
   overflow: hidden;
 }
 .centerwrap-footer {
-  padding: 1em 0 3em;
+  padding: 1.5em 0 3em;
 }
 .centerwrap-footer a {
   color: CL_DEF_1F;
@@ -465,7 +466,7 @@ footer {
   margin: 0;
 }
 .centerwrap-footer ul.menu li {
-  margin: 1em 0;
+  margin: 0.75em 0;
 }
 .footer-1col,
 .footer-2col,
@@ -496,14 +497,14 @@ footer {
   background-color: #c70000;
   color: #fff;
   line-height: 1;
-  padding: 0.5em 0;
+  padding: 0.75em 0;
 }
 .footer-extra .footer-1col,
 .footer-extra .footer-2col,
 .footer-extra .footer-3col,
 .footer-extra .footer-4col {
-  margin-bottom: 0.5em;
-  margin-top: 0.5em;
+  margin-bottom: 0.75em;
+  margin-top: 0.75em;
 }
 .footer-extra p {
   margin: 0;
@@ -538,8 +539,33 @@ footer {
   margin: 0;
   vertical-align: middle;
 }
+button,
+input,
+select,
+textarea {
+  margin-bottom: -1px;
+  margin-top: -1px;
+}
+.form-item,
+.form-actions {
+  margin-bottom: 1.5em;
+  margin-top: 1.5em;
+}
+.item-list ul li {
+  margin-bottom: 0;
+}
+.views-exposed-form .views-exposed-widget {
+  padding-top: 0.75em;
+}
+.views-exposed-widgets {
+  margin-bottom: 1.5em;
+}
+.view-sponsorship img {
+  height: 105px !important;
+}
 aside .twitter-acct img {
-  max-width: 290px;
+  height: 64px;
+  max-width: 309px;
   width: 100%;
 }
 @media only screen and (min-width: 30em) {
@@ -547,7 +573,7 @@ aside .twitter-acct img {
     display: inline-block;
     zoom: 1;
     *display: inline;
-    padding-top: 1em;
+    padding-top: 1.5em;
     vertical-align: top;
     width: 49%;
   }
@@ -569,18 +595,17 @@ aside .twitter-acct img {
   }
   .sidebar-last h2 {
     left: -0.667em;
-    line-height: 2.86em;
     position: relative;
-    width: 80%;
+    width: 90%;
     z-index: 0;
   }
   .sidebar-last h2:after {
     content: "";
     border-color: #c70000 transparent #c70000 #c70000;
     border-style: solid;
-    border-width: 1.43em;
+    border-width: 1em;
     position: absolute;
-    right: -1.43em;
+    right: -1em;
     top: 0;
     z-index: -1;
   }
