@@ -482,16 +482,19 @@ function cod_session_is_declined($node) {
  * Helper function to determien whether a given user is a speaker on a session.
  */
 
-function cod_session_user_is_speaker($uid, $node) {
-  if (empty($node->field_speakers)) {
-    return FALSE;
-  }
-  foreach($node->field_speakers['id'] as $speaker) {
-    if ($speaker['target_id'] == $uid)  {
-      return TRUE;
-    }
-  }
-}
+/** Dinonaktifkan
+*function cod_session_user_is_speaker($uid, $node) {
+*  if (empty($node->field_speakers)) {
+*    return FALSE;
+*  }
+*  foreach($node->field_speakers['id'] as $speaker) {
+*    if ($speaker['target_id'] == $uid)  {
+*      return TRUE;
+*    }
+*  }
+*}
+*/
+
 /**
  * Implements hook_node_presave().
  */
