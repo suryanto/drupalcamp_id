@@ -450,7 +450,7 @@ function cod_session_node_view_alter(&$build) {
 
   // Display the presenter confirmation link when a session is
   // accepted and scheduled.
-  if (!cod_session_is_scheduled($node) || !cod_session_is_accepted($node) || !cod_session_user_is_speaker($account->uid, $node)) {
+  if (!cod_session_is_scheduled($node) || !cod_session_is_accepted($node)) {
     unset($build['links']['flag']['#links']['flag-session_confirm']);
   }
 
