@@ -352,6 +352,16 @@ body {
   margin: 0;
   padding: 0;
 }
+a:link {
+  color: #c70000;
+  text-decoration: none;
+}
+a:visited,
+a:focus,
+a:hover,
+a:active {
+  text-decoration: underline;
+}
 p {
   margin: 1.5em 0;
 }
@@ -392,12 +402,24 @@ nav ol {
   margin-bottom: 1.5em;
   vertical-align: top;
 }
+.main-wrap .panel-pane {
+  background-color: #fff;
+  color: #444;
+  margin: 1.5em 0;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+}
+.main-wrap .panel-pane h2 {
+  font-size: 3em;
+  line-height: 1;
+  margin: 0;
+}
 .sidebar-last .sidebar {
   background: #fff;
   padding: 1.5em 1em;
 }
 .sidebar-last h2 {
-  background: #c70000;
+  background: #0173ba;
   color: #fff;
   font-weight: normal;
   margin: 0;
@@ -425,9 +447,8 @@ nav ol {
   margin-right: 1em;
 }
 .sidebar-last .user-title {
-  background: #fff;
-  color: #c70000;
-  margin: 0;
+  font-style: italic;
+  margin: 0.75em 0;
 }
 .page-footer {
   border-top: 2px solid #fff;
@@ -568,6 +589,12 @@ aside .twitter-acct img {
   max-width: 309px;
   width: 100%;
 }
+@media only screen and (min-width: 23em) {
+  .main-wrap .panel-pane {
+    padding-left: 2.75em;
+    padding-right: 2.75em;
+  }
+}
 @media only screen and (min-width: 30em) {
   .sidebar-last .view-keynote-speakers li {
     display: inline-block;
@@ -595,13 +622,13 @@ aside .twitter-acct img {
   }
   .sidebar-last h2 {
     left: -0.667em;
+    margin-right: 1em;
     position: relative;
-    width: 90%;
     z-index: 0;
   }
   .sidebar-last h2:after {
     content: "";
-    border-color: #c70000 transparent #c70000 #c70000;
+    border-color: #fff #fff #fff #0173ba;
     border-style: solid;
     border-width: 1em;
     position: absolute;
@@ -630,7 +657,7 @@ aside .twitter-acct img {
   }
   .sidebar-last {
     float: right;
-    max-width: 25.0714em;
+    max-width: 20.5714em;
   }
   .sidebar-last .view-keynote-speakers li {
     display: block;
