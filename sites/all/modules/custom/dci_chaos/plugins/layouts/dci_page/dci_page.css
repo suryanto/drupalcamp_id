@@ -628,11 +628,11 @@ aside .twitter-acct img {
   }
   .sidebar-last h2:after {
     content: "";
-    border-color: #fff #fff #fff #0173ba;
-    border-style: solid;
+    border-color: transparent transparent transparent #0173ba;
+    border-style: dotted dotted dotted solid;
     border-width: 1em;
     position: absolute;
-    right: -1em;
+    right: -1.9em;
     top: 0;
     z-index: -1;
   }
