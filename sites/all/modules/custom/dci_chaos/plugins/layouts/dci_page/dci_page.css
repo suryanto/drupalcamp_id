@@ -414,6 +414,10 @@ nav ol {
   line-height: 1;
   margin: 0;
 }
+.main-wrap .tabs ul {
+  border-bottom-style: none;
+  white-space: normal;
+}
 .sidebar-last .sidebar {
   background: #fff;
   padding: 1.5em 1em;

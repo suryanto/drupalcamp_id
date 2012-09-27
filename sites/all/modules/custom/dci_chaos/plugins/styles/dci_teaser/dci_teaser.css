@@ -17,8 +17,10 @@
 }
 .article-teasers .views-row {
   background-color: #fff;
+  border-bottom: 0.25em solid transparent;
+  border-top: 0.25em solid transparent;
   color: #444;
-  margin: 4.5em 0;
+  margin: 4em 0;
   padding-left: 0.5em;
   padding-right: 0.5em;
   position: relative;
